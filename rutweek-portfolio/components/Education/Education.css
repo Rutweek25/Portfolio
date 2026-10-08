@@ -1,0 +1,289 @@
+/* ───────────────────────────────────────────────────────────────────────
+   EDUCATION — alternating timeline with a scroll-filled spine.
+   All colors come from the global theme tokens, so light/dark just work.
+   ─────────────────────────────────────────────────────────────────────── */
+
+.edu {
+  --edu-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --edu-line: color-mix(in srgb, var(--color-text) 14%, transparent);
+  --edu-dot-y: clamp(2.2rem, 4.2vw, 4.8rem);
+  position: relative;
+  padding: clamp(4rem, 9vw, 11rem) clamp(1.25rem, 2vw, 3rem) clamp(4rem, 10vw, 12rem);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ── heading ── */
+.edu-eyebrow {
+  font-family: var(--edu-mono);
+  font-size: clamp(0.7rem, 0.85vw, 1rem);
+  letter-spacing: 0.4em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.edu-title {
+  margin: clamp(0.8rem, 1.5vw, 2rem) 0 0;
+  font-size: clamp(3rem, 8.6vw, 10rem);
+  font-weight: 400;
+  letter-spacing: -0.07em;
+  line-height: 0.98;
+}
+
+.edu-title-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+}
+
+.edu-title-line > span {
+  display: block;
+}
+
+.edu-title-line--accent {
+  color: var(--color-accent);
+}
+
+.edu-rule {
+  height: 1px;
+  background: var(--edu-line);
+  margin-top: clamp(1.5rem, 3vw, 4rem);
+}
+
+/* ── timeline ── */
+.edu-timeline {
+  position: relative;
+  margin-top: clamp(3rem, 7vw, 9rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 9vw, 11rem);
+}
+
+.edu-track {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--edu-line);
+}
+
+.edu-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-accent);
+  transform-origin: top center;
+  transform: scaleY(0);
+}
+
+.edu-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.edu-card {
+  grid-column: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(1rem, 3.4vw, 4.5rem);
+  padding-right: clamp(2rem, 4vw, 6rem);
+}
+
+.edu-item--right .edu-card {
+  grid-column: 2;
+  padding-right: 0;
+  padding-left: clamp(2rem, 4vw, 6rem);
+}
+
+/* dot + connector sit on the spine, level with the school name */
+.edu-dot {
+  position: absolute;
+  left: 50%;
+  top: var(--edu-dot-y);
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--color-bg);
+  border: 2px solid var(--edu-line);
+  z-index: 2;
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.edu-item.is-active .edu-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 6px var(--color-accent-soft);
+}
+
+.edu-connector {
+  position: absolute;
+  top: var(--edu-dot-y);
+  right: 50%;
+  width: 10%;
+  height: 1px;
+  background: var(--edu-line);
+  transition: background 0.4s ease;
+}
+
+.edu-item--right .edu-connector {
+  right: auto;
+  left: 50%;
+}
+
+.edu-item.is-active .edu-connector {
+  background: var(--color-accent);
+  opacity: 0.45;
+}
+
+/* ── card content ── */
+.edu-logo {
+  flex: 0 0 auto;
+  width: clamp(3.2rem, 5.4vw, 7rem);
+  height: clamp(3.2rem, 5.4vw, 7rem);
+  margin-top: clamp(0.4rem, 1.2vw, 1.6rem);
+}
+
+.edu-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.edu-logo span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  font-size: clamp(1.1rem, 1.9vw, 2.4rem);
+}
+
+.edu-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.edu-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 3rem);
+}
+
+.edu-school {
+  margin: 0;
+  max-width: 11em;
+  font-size: clamp(1.8rem, 3.7vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.edu-year {
+  flex: 0 0 auto;
+  padding-top: 0.9em;
+  font-family: var(--edu-mono);
+  font-size: clamp(0.7rem, 0.85vw, 1rem);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-text-subtle);
+}
+
+.edu-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6em;
+  margin: clamp(0.8rem, 1.2vw, 1.6rem) 0 0;
+  font-family: var(--edu-mono);
+  font-size: clamp(0.65rem, 0.8vw, 0.95rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+.edu-meta strong {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.edu-sep {
+  opacity: 0.5;
+}
+
+.edu-blurb {
+  margin: clamp(1rem, 1.6vw, 2.2rem) 0 0;
+  max-width: 34em;
+  font-size: clamp(1rem, 1.45vw, 1.8rem);
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+/* ── phones / small tablets: single column, spine on the left ── */
+@media (max-width: 768px) {
+  .edu {
+    --edu-dot-y: 1.3rem;
+  }
+
+  .edu-timeline {
+    gap: 3.5rem;
+  }
+
+  .edu-track {
+    left: 0.6rem;
+    transform: none;
+  }
+
+  .edu-item {
+    grid-template-columns: 1fr;
+    padding-left: 2.6rem;
+  }
+
+  .edu-dot {
+    left: calc(0.6rem + 1px);
+  }
+
+  .edu-connector {
+    display: none;
+  }
+
+  .edu-card,
+  .edu-item--right .edu-card {
+    grid-column: 1;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0;
+  }
+
+  .edu-logo {
+    margin-top: 0;
+  }
+
+  .edu-head {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .edu-year {
+    order: -1;
+    padding-top: 0;
+  }
+
+  .edu-school {
+    max-width: none;
+  }
+
+  .edu-meta {
+    letter-spacing: 0.16em;
+  }
+}

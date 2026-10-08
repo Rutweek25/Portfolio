@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix rutweek-portfolio run dev",
+    "build": "npm --prefix rutweek-portfolio run build",
+    "start": "npm --prefix rutweek-portfolio run start"
+  }
+}

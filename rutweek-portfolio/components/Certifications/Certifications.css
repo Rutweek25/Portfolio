@@ -1,0 +1,309 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   CERTIFICATIONS & CREDENTIALS SECTION
+   Adapts smoothly to both Light and Dark mode using global theme tokens.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.cert-section {
+  position: relative;
+  width: 100%;
+  padding: clamp(5rem, 10vw, 11rem) clamp(1.25rem, 4vw, 5rem);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+.cert-container {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* ── Heading ── */
+.cert-eyebrow {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(0.7rem, 0.85vw, 0.95rem);
+  letter-spacing: 0.35em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.cert-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .cert-head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.cert-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.cert-title-accent {
+  color: var(--color-accent);
+  display: inline-block;
+}
+
+.cert-desc {
+  max-width: 44ch;
+  font-size: clamp(0.95rem, 1.2vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ── Filter categories ── */
+.cert-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: clamp(2.5rem, 5vw, 4.5rem);
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cert-filter-btn {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  padding: 0.5rem 1.1rem;
+  border-radius: 9999px;
+  font-size: clamp(0.75rem, 0.85vw, 0.9rem);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+
+.cert-filter-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  transform: translateY(-1px);
+}
+
+.cert-filter-btn.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px var(--color-accent-soft);
+}
+
+/* ── Grid ── */
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.2rem, 2.5vw, 2.2rem);
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .cert-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .cert-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Card ── */
+.cert-card {
+  position: relative;
+  background: var(--color-bg-alt, var(--color-bg));
+  border: 1px solid var(--color-border);
+  border-radius: 1.5rem;
+  padding: clamp(1.6rem, 2.8vw, 2.4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
+  overflow: hidden;
+}
+
+.cert-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--cert-accent, var(--color-accent));
+  box-shadow: 0 20px 38px -10px rgba(0, 0, 0, 0.12),
+              0 0 0 1px var(--cert-accent, var(--color-accent));
+}
+
+[data-theme="dark"] .cert-card:hover {
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.65),
+              0 0 25px -5px color-mix(in srgb, var(--cert-accent, var(--color-accent)) 25%, transparent);
+}
+
+/* Ambient glow orb on card top-right */
+.cert-card-glow {
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--cert-accent, var(--color-accent)) 0%, transparent 70%);
+  opacity: 0.12;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.cert-card:hover .cert-card-glow {
+  opacity: 0.28;
+  transform: scale(1.3);
+}
+
+/* ── Card Top Header ── */
+.cert-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.cert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--cert-accent, var(--color-accent)) 30%, transparent);
+  background: color-mix(in srgb, var(--cert-accent, var(--color-accent)) 10%, transparent);
+  color: var(--cert-accent, var(--color-accent));
+}
+
+.cert-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cert-accent, var(--color-accent));
+  box-shadow: 0 0 8px var(--cert-accent, var(--color-accent));
+}
+
+.cert-year {
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.1em;
+}
+
+/* ── Card Icon & Body ── */
+.cert-card-icon {
+  margin-top: 1.8rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--cert-accent, var(--color-accent)) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--cert-accent, var(--color-accent)) 25%, transparent);
+  display: grid;
+  place-items: center;
+  color: var(--cert-accent, var(--color-accent));
+}
+
+.cert-card-title {
+  margin: 1.2rem 0 0;
+  font-size: clamp(1.25rem, 1.6vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+.cert-card-issuer {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.cert-card-blurb {
+  margin: 0.9rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+/* ── Skill chips ── */
+.cert-card-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.4rem;
+}
+
+.cert-skill-chip {
+  padding: 0.22rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-family: ui-monospace, monospace;
+  background: color-mix(in srgb, var(--color-text) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  color: var(--color-text);
+}
+
+/* ── Card Footer Action ── */
+.cert-card-footer {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cert-credential-id {
+  font-family: ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-subtle);
+}
+
+.cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cert-accent, var(--color-accent));
+  text-decoration: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.cert-link:hover {
+  transform: translateX(3px);
+  opacity: 0.9;
+}
+
+.cert-link svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s ease;
+}
+
+.cert-link:hover svg {
+  transform: translate(2px, -2px);
+}
